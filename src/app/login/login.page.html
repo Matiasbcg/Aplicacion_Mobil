@@ -7,7 +7,46 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
+      <ion-title>Login</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div class="login-container">
+    <div class="login-header">
+      <strong>SkeletonAPP</strong>
+      <p>Aquí comienza todo</p>
+    </div>
+
+    <h1>¡BIENVENIDO!</h1>
+
+    <form [formGroup]="formularioLogin">
+      <ion-item>
+        <ion-label position="floating">Usuario</ion-label>
+        <ion-input formControlName="usuario"></ion-input>
+      </ion-item>
+      <div *ngIf="formularioLogin.get('usuario')?.invalid && formularioLogin.get('usuario')?.touched" class="error-messages">
+        <p *ngIf="formularioLogin.get('usuario')?.errors?.['required']">El campo es requerido.</p>
+        <p *ngIf="formularioLogin.get('usuario')?.errors?.['minlength']">Debe tener al menos 3 caracteres.</p>
+        <p *ngIf="formularioLogin.get('usuario')?.errors?.['maxlength']">No puede exceder los 8 caracteres.</p>
+        <p *ngIf="formularioLogin.get('usuario')?.errors?.['pattern']">Solo se permiten caracteres alfanuméricos.</p>
+      </div>
+
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+      <div *ngIf="formularioLogin.get('password')?.invalid && formularioLogin.get('password')?.touched" class="error-messages">
+        <p *ngIf="formularioLogin.get('password')?.errors?.['required']">El campo es requerido.</p>
+        <p *ngIf="formularioLogin.get('password')?.errors?.['pattern']">Debe ser un número de 4 dígitos.</p>
+      </div>
+
+      <ion-button expand="block" (click)="navigateToHome()">Ingresar</ion-button>
+    </form>
+    <br>
+    <div class="create-account">
+      <a href="#">Crea tu cuenta aquí</a>
+    </div>
+  </div>
 </ion-content>
+
+

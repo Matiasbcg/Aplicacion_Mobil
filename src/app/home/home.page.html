@@ -1,20 +1,57 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Home</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title>Home</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <strong>SkeletonAPP</strong>
+    <p>Usuario: {{ usuario }}</p>
+
+    <form [formGroup]="formularioHome">
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input formControlName="nombre" #nombreInput></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Apellido</ion-label>
+        <ion-input formControlName="apellido" #apellidoInput></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Nivel de educación</ion-label>
+        <ion-select formControlName="nivelEducacion">
+          <ion-select-option value="basica">Basica</ion-select-option>
+          <ion-select-option value="media">Media</ion-select-option>
+          <ion-select-option value="universitaria">Universitaria</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Fecha de Nacimiento</ion-label>
+        <br>
+        <br>
+        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </ion-item>
+    </form>
+
+    <br>
+    <ion-button (click)="limpiarCampos()">Limpiar</ion-button>
+    <ion-button (click)="mostrarInformacion()">Mostrar</ion-button>
   </div>
 </ion-content>
+
+
+
+
+
