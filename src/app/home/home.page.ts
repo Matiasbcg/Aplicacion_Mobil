@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,12 +11,18 @@ import { AlertController } from '@ionic/angular';
 export class HomePage implements OnInit {
 
   usuario: string | null = null;
+  password: string | null = null;
   formularioHome: FormGroup;
   
   @ViewChild('nombreInput') nombreInput: ElementRef | null = null;
   @ViewChild('apellidoInput') apellidoInput: ElementRef | null = null;
 
-  constructor(private fb: FormBuilder, private alertController: AlertController) { 
+  constructor(
+    private fb: FormBuilder, 
+    private alertController: AlertController,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { 
     this.formularioHome = this.fb.group({
       nombre: [''],
       apellido: [''],
@@ -25,7 +32,11 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
-    this.usuario = localStorage.getItem('usuario');
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras.state) {
+      this.usuario = navigation.extras.state['usuario'];
+      this.password = navigation.extras.state['password'];
+    }
   }
 
   limpiarCampos() {
@@ -53,13 +64,15 @@ export class HomePage implements OnInit {
 
   applyAnimation(element: any) {
     if (element) {
-      element.style.animation = 'moveRight 1s forwards';
+      element.classList.add('move-right');
       element.addEventListener('animationend', () => {
-        element.style.animation = '';
+        element.classList.remove('move-right');
       });
     }
   }
 }
+
+
 
 
 

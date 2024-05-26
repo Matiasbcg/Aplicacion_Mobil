@@ -27,10 +27,15 @@
 }
 
 @keyframes moveRight {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(100px); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
-ion-item {
-  --inner-padding-end: 16px;
+.move-right {
+  animation: moveRight 1s forwards;
+  -webkit-animation: moveRight 1s forwards;
 }
